@@ -21,9 +21,6 @@ for library in ['_version', '_scatter', '_segment_csr', '_segment_coo']:
         from .placeholder import cuda_version_placeholder
         torch.ops.torch_scatter.cuda_version = cuda_version_placeholder
 
-        from .placeholder import scatter_placeholder
-        torch.ops.torch_scatter.scatter_mul = scatter_placeholder
-
         from .placeholder import scatter_arg_placeholder
         torch.ops.torch_scatter.scatter_min = scatter_arg_placeholder
         torch.ops.torch_scatter.scatter_max = scatter_arg_placeholder
@@ -64,7 +61,7 @@ if is_not_hip and is_cuda and cuda_version != -1:  # pragma: no cover
             f'{major}.{minor}. Please reinstall the torch_scatter that '
             f'matches your PyTorch install.')
 
-from .scatter import scatter_sum, scatter_add, scatter_mul  # noqa
+from .scatter import scatter_sum, scatter_add  # noqa
 from .scatter import scatter_mean, scatter_min, scatter_max, scatter  # noqa
 from .segment_csr import segment_sum_csr, segment_add_csr  # noqa
 from .segment_csr import segment_mean_csr, segment_min_csr  # noqa
@@ -78,7 +75,6 @@ from .composite import scatter_softmax, scatter_log_softmax  # noqa
 __all__ = [
     'scatter_sum',
     'scatter_add',
-    'scatter_mul',
     'scatter_mean',
     'scatter_min',
     'scatter_max',

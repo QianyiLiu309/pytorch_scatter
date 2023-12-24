@@ -29,12 +29,6 @@ def scatter_add(src: torch.Tensor, index: torch.Tensor, dim: int = -1,
     return scatter_sum(src, index, dim, out, dim_size)
 
 
-def scatter_mul(src: torch.Tensor, index: torch.Tensor, dim: int = -1,
-                out: Optional[torch.Tensor] = None,
-                dim_size: Optional[int] = None) -> torch.Tensor:
-    return torch.ops.torch_scatter.scatter_mul(src, index, dim, out, dim_size)
-
-
 def scatter_mean(src: torch.Tensor, index: torch.Tensor, dim: int = -1,
                  out: Optional[torch.Tensor] = None,
                  dim_size: Optional[int] = None) -> torch.Tensor:
@@ -150,8 +144,6 @@ def scatter(src: torch.Tensor, index: torch.Tensor, dim: int = -1,
     """
     if reduce == 'sum' or reduce == 'add':
         return scatter_sum(src, index, dim, out, dim_size)
-    if reduce == 'mul':
-        return scatter_mul(src, index, dim, out, dim_size)
     elif reduce == 'mean':
         return scatter_mean(src, index, dim, out, dim_size)
     elif reduce == 'min':

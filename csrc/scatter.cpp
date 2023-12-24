@@ -240,13 +240,6 @@ scatter_sum(torch::Tensor src, torch::Tensor index, int64_t dim,
 }
 
 SCATTER_API torch::Tensor
-scatter_mul(torch::Tensor src, torch::Tensor index, int64_t dim,
-            torch::optional<torch::Tensor> optional_out,
-            torch::optional<int64_t> dim_size) {
-  return ScatterMul::apply(src, index, dim, optional_out, dim_size)[0];
-}
-
-SCATTER_API torch::Tensor
 scatter_mean(torch::Tensor src, torch::Tensor index, int64_t dim,
              torch::optional<torch::Tensor> optional_out,
              torch::optional<int64_t> dim_size) {
@@ -271,7 +264,6 @@ scatter_max(torch::Tensor src, torch::Tensor index, int64_t dim,
 
 static auto registry = torch::RegisterOperators()
                            .op("torch_scatter::scatter_sum", &scatter_sum)
-                           .op("torch_scatter::scatter_mul", &scatter_mul)
                            .op("torch_scatter::scatter_mean", &scatter_mean)
                            .op("torch_scatter::scatter_min", &scatter_min)
                            .op("torch_scatter::scatter_max", &scatter_max);
