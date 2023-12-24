@@ -65,8 +65,7 @@ from .segment_csr import segment_max_csr, segment_csr, gather_csr  # noqa
 from .segment_coo import segment_sum_coo, segment_add_coo  # noqa
 from .segment_coo import segment_mean_coo, segment_min_coo  # noqa
 from .segment_coo import segment_max_coo, segment_coo, gather_coo  # noqa
-from .composite import scatter_std, scatter_logsumexp  # noqa
-from .composite import scatter_softmax, scatter_log_softmax  # noqa
+from .composite import scatter_std  # noqa
 
 __all__ = [
     'scatter_sum',
@@ -89,8 +88,6 @@ __all__ = [
     'gather_coo',
     'scatter_std',
     'scatter_logsumexp',
-    'scatter_softmax',
-    'scatter_log_softmax',
     'torch_scatter',
     '__version__',
 ]
