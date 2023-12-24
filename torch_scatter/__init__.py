@@ -21,10 +21,6 @@ for library in ['_version', '_scatter', '_segment_csr', '_segment_coo']:
         from .placeholder import cuda_version_placeholder
         torch.ops.torch_scatter.cuda_version = cuda_version_placeholder
 
-        from .placeholder import scatter_arg_placeholder
-        torch.ops.torch_scatter.scatter_min = scatter_arg_placeholder
-        torch.ops.torch_scatter.scatter_max = scatter_arg_placeholder
-
         from .placeholder import (gather_csr_placeholder,
                                   segment_csr_arg_placeholder,
                                   segment_csr_placeholder)
@@ -62,7 +58,7 @@ if is_not_hip and is_cuda and cuda_version != -1:  # pragma: no cover
             f'matches your PyTorch install.')
 
 from .scatter import scatter_sum, scatter_add  # noqa
-from .scatter import scatter_mean, scatter_min, scatter_max, scatter  # noqa
+from .scatter import scatter_mean, scatter  # noqa
 from .segment_csr import segment_sum_csr, segment_add_csr  # noqa
 from .segment_csr import segment_mean_csr, segment_min_csr  # noqa
 from .segment_csr import segment_max_csr, segment_csr, gather_csr  # noqa
@@ -76,8 +72,6 @@ __all__ = [
     'scatter_sum',
     'scatter_add',
     'scatter_mean',
-    'scatter_min',
-    'scatter_max',
     'scatter',
     'segment_sum_csr',
     'segment_add_csr',

@@ -51,21 +51,6 @@ def scatter_mean(src: torch.Tensor, index: torch.Tensor, dim: int = -1,
         out.div_(count, rounding_mode='floor')
     return out
 
-
-def scatter_min(
-        src: torch.Tensor, index: torch.Tensor, dim: int = -1,
-        out: Optional[torch.Tensor] = None,
-        dim_size: Optional[int] = None) -> Tuple[torch.Tensor, torch.Tensor]:
-    return torch.ops.torch_scatter.scatter_min(src, index, dim, out, dim_size)
-
-
-def scatter_max(
-        src: torch.Tensor, index: torch.Tensor, dim: int = -1,
-        out: Optional[torch.Tensor] = None,
-        dim_size: Optional[int] = None) -> Tuple[torch.Tensor, torch.Tensor]:
-    return torch.ops.torch_scatter.scatter_max(src, index, dim, out, dim_size)
-
-
 def scatter(src: torch.Tensor, index: torch.Tensor, dim: int = -1,
             out: Optional[torch.Tensor] = None, dim_size: Optional[int] = None,
             reduce: str = "sum") -> torch.Tensor:
@@ -146,9 +131,5 @@ def scatter(src: torch.Tensor, index: torch.Tensor, dim: int = -1,
         return scatter_sum(src, index, dim, out, dim_size)
     elif reduce == 'mean':
         return scatter_mean(src, index, dim, out, dim_size)
-    elif reduce == 'min':
-        return scatter_min(src, index, dim, out, dim_size)[0]
-    elif reduce == 'max':
-        return scatter_max(src, index, dim, out, dim_size)[0]
     else:
         raise ValueError

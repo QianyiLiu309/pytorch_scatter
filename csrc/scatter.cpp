@@ -246,24 +246,6 @@ scatter_mean(torch::Tensor src, torch::Tensor index, int64_t dim,
   return ScatterMean::apply(src, index, dim, optional_out, dim_size)[0];
 }
 
-SCATTER_API std::tuple<torch::Tensor, torch::Tensor>
-scatter_min(torch::Tensor src, torch::Tensor index, int64_t dim,
-            torch::optional<torch::Tensor> optional_out,
-            torch::optional<int64_t> dim_size) {
-  auto result = ScatterMin::apply(src, index, dim, optional_out, dim_size);
-  return std::make_tuple(result[0], result[1]);
-}
-
-SCATTER_API std::tuple<torch::Tensor, torch::Tensor>
-scatter_max(torch::Tensor src, torch::Tensor index, int64_t dim,
-            torch::optional<torch::Tensor> optional_out,
-            torch::optional<int64_t> dim_size) {
-  auto result = ScatterMax::apply(src, index, dim, optional_out, dim_size);
-  return std::make_tuple(result[0], result[1]);
-}
-
 static auto registry = torch::RegisterOperators()
                            .op("torch_scatter::scatter_sum", &scatter_sum)
-                           .op("torch_scatter::scatter_mean", &scatter_mean)
-                           .op("torch_scatter::scatter_min", &scatter_min)
-                           .op("torch_scatter::scatter_max", &scatter_max);
+                           .op("torch_scatter::scatter_mean", &scatter_mean);
