@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.0)
 project(torchscatter)
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(TORCHSCATTER_VERSION 2.1.2)
 
 option(WITH_CUDA "Enable CUDA support" OFF)
@@ -39,7 +39,13 @@ target_include_directories(${PROJECT_NAME} INTERFACE
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
-set(TORCHSCATTER_CMAKECONFIG_INSTALL_DIR "share/cmake/TorchScatter" CACHE STRING "install path for TorchScatterConfig.cmake")
+set(CUSTOM_INSTALL_PREFIX "/home/ql309/rds/hpc-work/libtorchscatter")
+
+# set(TORCHSCATTER_CMAKECONFIG_INSTALL_DIR "share/cmake/TorchScatter" CACHE STRING "install path for TorchScatterConfig.cmake")
+set(TORCHSCATTER_CMAKECONFIG_INSTALL_DIR "${CUSTOM_INSTALL_PREFIX}/share/cmake/TorchScatter" CACHE STRING "install path for TorchScatterConfig.cmake")
+
+set(CMAKE_INSTALL_LIBDIR "${CUSTOM_INSTALL_PREFIX}/lib")
+set(CMAKE_INSTALL_INCLUDEDIR "${CUSTOM_INSTALL_PREFIX}/include")
 
 configure_package_config_file(cmake/TorchScatterConfig.cmake.in
   "${CMAKE_CURRENT_BINARY_DIR}/TorchScatterConfig.cmake"
